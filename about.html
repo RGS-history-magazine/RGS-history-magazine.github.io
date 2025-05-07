@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>RGS History Magazine</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Times New Roman", serif;
+      background-color: #f4f4f4;
+    }
+
+    /* 🔔 Announcement Bar */
+    .announcement {
+      background-color: gold;
+      color: black;
+      text-align: center;
+      padding: 10px 0;
+      font-weight: bold;
+      animation: slideDown 1s ease-out;
+    }
+
+    @keyframes slideDown {
+      from {
+        transform: translateY(-100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    /* 🧭 Navigation Bar */
+    .nav-bar {
+      background-color: #222;
+      color: white;
+      padding: 15px 60px;
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .nav-bar ul {
+      list-style: none;
+      display: flex;
+      gap: 25px;
+      margin: 0;
+      padding: 0;
+    }
+
+    .nav-bar ul li a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s ease;
+    }
+
+    .nav-bar ul li a:hover {
+      color: gold;
+    }
+
+    /* 💙 About Page */
+    header {
+      background-color: royalblue;
+      color: white;
+      padding: 60px 20px;
+      text-align: center;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    section {
+      background: white;
+      padding: 30px;
+      margin-bottom: 30px;
+      border-left: 6px solid royalblue;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    section h2 {
+      margin-top: 0;
+      color: #222;
+    }
+
+    section p {
+      line-height: 1.6;
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- 🔔 Announcement Bar -->
+  <div class="announcement">
+    🎉 Free shipping on orders over £20!
+  </div>
+
+  <!-- 🧭 Navigation Bar -->
+  <div class="nav-bar">
+    <ul>
+      <li><a href="#">Home</a></li>
+      <li><a href="#">Blog</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </div>
+
+  <!-- 💙 About Page Header -->
+  <header>
+    <h1>About Us</h1>
+    <p>Learn more about our mission and our story 💙</p>
+  </header>
+
+  <!-- 💬 About Us Content -->
+  <div class="container">
+    <section>
+      <h2>Our Story</h2>
+      <p>We started this journey with the vision of bringing eco-friendly fashion to the masses. Our commitment to sustainability and design excellence drives everything we do. Every piece we create is made with care, ensuring that our impact on the planet is as positive as our products.</p>
+    </section>
+
+    <section>
+      <h2>Our Mission</h2>
+      <p>Our mission is simple: to make fashion that’s not just stylish but also kind to the environment. We believe in supporting the planet, one outfit at a time. We use eco-friendly materials and ethical production methods to create items that not only look good but also do good for the world around us.</p>
+    </section>
+
+  </div>
+
+</body>
+</html>
