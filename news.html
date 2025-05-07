@@ -64,6 +64,57 @@
         padding: 0 10px;
       }
     }
+
+    
+    /* 🔔 Announcement Bar */
+    .announcement {
+      background-color: gold;
+      color: black;
+      text-align: center;
+      padding: 10px 0;
+      font-weight: bold;
+      animation: slideDown 1s ease-out;
+    }
+
+    @keyframes slideDown {
+      from {
+        transform: translateY(-100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    /* 🧭 Navigation Bar */
+    .nav-bar {
+      background-color: #222;
+      color: white;
+      padding: 15px 60px;
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .nav-bar ul {
+      list-style: none;
+      display: flex;
+      gap: 25px;
+      margin: 0;
+      padding: 0;
+    }
+
+    .nav-bar ul li a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s ease;
+    }
+
+    .nav-bar ul li a:hover {
+      color: gold;
+    }
+    
   </style>
 </head>
 <body>
