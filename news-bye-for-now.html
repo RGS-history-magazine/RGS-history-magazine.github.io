@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>RGS History Magazine</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Times New Roman", serif;
+      background-color: #f4f4f4;
+    }
+
+    /* 🔔 Announcement Bar */
+    .announcement {
+      background-color: gold;
+      color: black;
+      text-align: center;
+      padding: 10px 0;
+      font-weight: bold;
+      animation: slideDown 1s ease-out;
+    }
+
+    @keyframes slideDown {
+      from {
+        transform: translateY(-100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    /* 🧭 Navigation Bar */
+    .nav-bar {
+      background-color: #222;
+      color: white;
+      padding: 15px 60px;
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .nav-bar ul {
+      list-style: none;
+      display: flex;
+      gap: 25px;
+      margin: 0;
+      padding: 0;
+    }
+
+    .nav-bar ul li a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s ease;
+    }
+
+    .nav-bar ul li a:hover {
+      color: gold;
+    }
+
+    /* 💙 Article Header */
+    header {
+      background-color: royalblue;
+      color: white;
+      padding: 60px 20px;
+      text-align: center;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    /* 📰 Article Main Content */
+    .article-content {
+      display: flex;
+      justify-content: space-between;
+      gap: 30px;
+    }
+
+    .article-main {
+      width: 70%;
+    }
+
+    .article-main h1 {
+      margin-top: 0;
+      color: #222;
+    }
+
+    .article-main img {
+      width: 100%;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+
+    .article-main p {
+      line-height: 1.8;
+    }
+
+    /* 📝 Sidebar */
+    .sidebar {
+      width: 30%;
+    }
+
+    .sidebar h3 {
+      color: royalblue;
+    }
+
+    .related-posts ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .related-posts ul li {
+      margin-bottom: 10px;
+    }
+
+    .related-posts a {
+      color: royalblue;
+      text-decoration: none;
+    }
+
+    .related-posts a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 768px) {
+      .article-content {
+        flex-direction: column;
+      }
+
+      .article-main,
+      .sidebar {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 🔔 Announcement Bar -->
+  <div class="announcement">
+    🎉 Free shipping on orders over £20!
+  </div>
+
+  <!-- 🧭 Navigation Bar -->
+  <div class="nav-bar">
+    <ul>
+      <li><a href="#">Home</a></li>
+      <li><a href="#">Blog</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </div>
+
+  <!-- 💙 Article Header -->
+  <header>
+    <h1>Article Title Goes Here</h1>
+    <p>By Author Name | Date: 7 May 2025</p>
+  </header>
+
+  <!-- 📰 Article Main Content -->
+  <div class="container">
+    <div class="article-content">
+      <div class="article-main">
+        <!-- Article Image -->
+        <img src="https://via.placeholder.com/1000x500" alt="Article Image">
+        
+        <!-- Article Text -->
+        <h1>The Article Heading</h1>
+     
+
+        <p>It is with mixed feelings that we announce a temporary pause in the production of the RGS History Magazine, which will not be releasing any new editions until September 2025. 
+          The decision comes as a result of a few challenges that have emerged within our team, particularly the shortage of contributors we will face as several key students across various
+          year groups will be leaving the school this year.</p>
+
+        <p>The History Magazine, which has been a beloved part of the RGS community for a few years, has always relied on the enthusiasm and dedication of students to bring fresh and engaging content. 
+          Unfortunately, with a smaller group of contributors, it will become difficult to maintain the high standards that have defined the magazine’s legacy. However, this is not the end of the 
+          magazine—it’s simply a brief pause.</p>
+
+        <p>The bright side? In September 2025, many more students will join our school, and with their return, we hope
+          to kickstart the magazine once more, with a fresh team of passionate students eager to dive in and help create something special. This break also gives us time to regroup, plan, and develop new 
+          ideas for a more exciting and dynamic magazine that everyone can enjoy.</p>
+
+        <p>We are optimistic that the new academic year will bring new faces and fresh energy to the magazine team. We look forward to welcoming students from all year groups who are interested in exploring the
+          fascinating world of history through writing, research, and creative expression. Whether you’re a budding writer, researcher, or someone simply looking for a fun way to get involved, we can’t wait to 
+          see what ideas and stories you bring to the table.</p>
+
+        <p>Here’s to an exciting new chapter for the RGS History Magazine, and we can’t wait to see you all in September 2025!
+
+</p>
+
+        
+      </div>
+
+      <!-- 📝 Sidebar (Related Posts) -->
+      <div class="sidebar">
+        <div class="related-posts">
+          <h3>Related Posts</h3>
+          <ul>
+            <li><a href="#">How to Start a Blog</a></li>
+            <li><a href="#">Tips for Writing Engaging Content</a></li>
+            <li><a href="#">5 Ways to Improve Your Website's Design</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
