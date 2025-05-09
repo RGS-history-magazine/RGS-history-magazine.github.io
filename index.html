@@ -178,49 +178,97 @@
       50% { background-position: 100% 50%; }
       100% { background-position: 0% 50%; }
     }
-#gamePopup {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: #333;
-      z-index: 9999;
-      color: white;
-      text-align: center;
-    }
 
-    #gameCanvas {
-      background: #89c2d9;
-      border: 5px solid #fff;
-      margin-top: 50px;
-    }
+.timeline-container {
+            width: 100%;
+            overflow-x: auto;
+            white-space: nowrap;
+            background-color: #fff;
+            padding: 40px 0;
+            position: relative;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            display: none; /* Hidden initially */
+        }
 
-    #closeGame {
-      position: absolute;
-      top: 15px;
-      right: 20px;
-      font-size: 18px;
-      background: crimson;
-      color: white;
-      border: none;
-      padding: 8px 15px;
-      cursor: pointer;
-    }
+        .timeline {
+            display: inline-block;
+            padding-left: 50px;
+        }
 
-    h2 {
-      margin-top: 15px;
-    }
+        .timeline-event {
+            display: inline-block;
+            width: 250px;
+            height: 250px;
+            background-color: #8b5a2b;
+            border-radius: 15px;
+            color: white;
+            text-align: center;
+            line-height: 250px;
+            margin: 10px;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.3s ease;
+            background-image: url('https://via.placeholder.com/250'); /* Placeholder Image */
+            background-size: cover;
+            background-position: center;
+        }
 
-    #score {
-      position: fixed;
-      top: 20px;
-      left: 20px;
-      font-size: 20px;
-      color: white;
-    }
-    
+        .timeline-event:hover {
+            background-color: #6e4a2f;
+            transform: scale(1.1);
+        }
+
+        .event-details {
+            display: none;
+            position: fixed;
+            top: 20%;
+            left: 10%;
+            width: 80%;
+            background-color: white;
+            border: 2px solid #ccc;
+            padding: 20px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        .event-details img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .close-btn {
+            background-color: #f44336;
+            color: white;
+            border: none;
+            font-size: 20px;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+
+        .close-btn:hover {
+            background-color: #d32f2f;
+        }
+
+        .event-title {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .event-description {
+            font-size: 18px;
+            margin-top: 10px;
+        }
   </style>
 </head>
 <body>
@@ -270,15 +318,21 @@
   
   </div>
 
+ <div class="timeline-container" id="timelineContainer">
+        <div class="timeline">
+            <div class="timeline-event" onclick="showDetails('1066-01', 'William the Conqueror Claims the Throne', 'January 1066, William the Conqueror claims the throne of England after King Edward the Confessor’s death.', 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/William_the_Conqueror.jpg/800px-William_the_Conqueror.jpg')">1066</div>
+            <div class="timeline-event" onclick="showDetails('1066-02', 'Battle of Stamford Bridge', 'September 25, 1066 - King Harold II defeats the invading army of Harald Hardrada at the Battle of Stamford Bridge.', 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Harold_II_of_England.jpg/800px-Harold_II_of_England.jpg')">Sept 25</div>
+            <div class="timeline-event" onclick="showDetails('1066-03', 'Battle of Hastings', 'October 14, 1066 - The Battle of Hastings between the Normans and Anglo-Saxons. Harold II is killed, and William the Conqueror wins.', 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Battle_of_Hastings.jpg/1024px-Battle_of_Hastings.jpg')">Oct 14</div>
+            <div class="timeline-event" onclick="showDetails('1066-04', 'Coronation of William the Conqueror', 'December 25, 1066 - William the Conqueror is crowned King of England.', 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Coronation_of_William_Conqueror.jpg/800px-Coronation_of_William_Conqueror.jpg')">Dec 25</div>
+        </div>
+    </div>
 
- <div id="gamePopup">
-  <button id="closeGame" onclick="closeGame()">✖ Close</button>
-  <h2>🏹 Battle of Hastings – Crossbow Game 🏹</h2>
-  <canvas id="gameCanvas" width="800" height="400"></canvas>
-  <div id="score">Score: 0</div>
-</div>
-
-
+    <div class="event-details" id="eventDetails">
+        <button class="close-btn" onclick="closeDetails()">X</button>
+        <h2 class="event-title" id="eventTitle"></h2>
+        <img id="eventImage" src="" alt="Event Image">
+        <p class="event-description" id="eventDescription"></p>
+    </div>
 
   <script src="history-events.js"></script>
 
