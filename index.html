@@ -179,40 +179,39 @@
       100% { background-position: 0% 50%; }
     }
 
-    #easter-egg {
+    #gamePopup {
       display: none;
       position: fixed;
-      top: 20%;
-      left: 50%;
-      transform: translateX(-50%);
-      background: #fff;
-      border: 5px solid gold;
-      padding: 20px;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: #333;
       z-index: 9999;
+      color: white;
       text-align: center;
-      box-shadow: 0 0 20px rgba(0,0,0,0.4);
-      animation: bounce 1s infinite;
     }
 
-    #easter-egg img {
-      max-width: 150px;
+    #gameCanvas {
+      background: #89c2d9;
+      border: 5px solid #fff;
+      margin-top: 50px;
     }
 
-    @keyframes bounce {
-      0%, 100% { transform: translate(-50%, 0); }
-      50% { transform: translate(-50%, -10px); }
-    }
-
-    #close-btn {
+    #closeGame {
       position: absolute;
-      top: 10px;
-      right: 10px;
+      top: 15px;
+      right: 20px;
       font-size: 18px;
-      background: red;
+      background: crimson;
       color: white;
       border: none;
-      padding: 5px 10px;
+      padding: 8px 15px;
       cursor: pointer;
+    }
+
+    h2 {
+      margin-top: 15px;
     }
     
   </style>
@@ -261,17 +260,18 @@
     </section>
 
 
-         
-
+  
   </div>
 
 
-  <div id="easter-egg">
-  <button id="close-btn" onclick="closeEasterEgg()">✖</button>
-  <img src="https://upload.wikimedia.org/wikipedia/commons/1/1b/William_the_Conqueror_%28miniature%29.jpg" alt="William">
-  <p>🎶 William is conquering the dance floor! 🎶</p>
-  <audio id="danceMusic" src="your-audio.mp3" autoplay></audio>
+  <div id="gamePopup">
+  <button id="closeGame" onclick="closeGame()">✖ Close</button>
+  <h2>🏹 Battle of Hastings – Norman Archer Game 🏹</h2>
+  <canvas id="gameCanvas" width="800" height="400"></canvas>
 </div>
+
+
+
 
   <script src="history-events.js"></script>
 
