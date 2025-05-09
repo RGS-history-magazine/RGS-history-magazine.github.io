@@ -82,6 +82,100 @@ const events = [
         displayEvent(currentEvent);
 
 
+// Easter eggs below
+
+
+let inputSequence = '';
+  document.addEventListener('keydown', (e) => {
+    inputSequence += e.key.toLowerCase();
+    if (inputSequence.includes('1066')) {
+      startGame();
+    }
+    if (inputSequence.length > 10) inputSequence = '';
+  });
+
+  function startGame() {
+    document.getElementById('gamePopup').style.display = 'block';
+    startBattle();
+  }
+
+  function closeGame() {
+    document.getElementById('gamePopup').style.display = 'none';
+    location.reload(); // resets the game
+  }
+
+  // Simple Game Code
+  function startBattle() {
+    const canvas = document.getElementById('gameCanvas');
+    const ctx = canvas.getContext('2d');
+
+    const player = { x: 50, y: 180, width: 20, height: 40, color: 'brown' };
+    let arrows = [];
+    let targets = [];
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowUp') player.y -= 10;
+      if (e.key === 'ArrowDown') player.y += 10;
+      if (e.key === ' ') {
+        arrows.push({ x: player.x + 20, y: player.y + 10, width: 10, height: 4 });
+      }
+    });
+
+    function spawnTarget() {
+      const y = Math.random() * (canvas.height - 40);
+      targets.push({ x: canvas.width, y: y, width: 30, height: 30, color: 'red' });
+    }
+
+    function drawPlayer() {
+      ctx.fillStyle = player.color;
+      ctx.fillRect(player.x, player.y, player.width, player.height);
+    }
+
+    function drawArrows() {
+      ctx.fillStyle = 'black';
+      arrows.forEach((arrow, i) => {
+        arrow.x += 8;
+        ctx.fillRect(arrow.x, arrow.y, arrow.width, arrow.height);
+        if (arrow.x > canvas.width) arrows.splice(i, 1);
+      });
+    }
+
+    function drawTargets() {
+      targets.forEach((target, i) => {
+        target.x -= 3;
+        ctx.fillStyle = target.color;
+        ctx.fillRect(target.x, target.y, target.width, target.height);
+
+        // Collision detection
+        arrows.forEach((arrow, j) => {
+          if (
+            arrow.x < target.x + target.width &&
+            arrow.x + arrow.width > target.x &&
+            arrow.y < target.y + target.height &&
+            arrow.y + arrow.height > target.y
+          ) {
+            targets.splice(i, 1);
+            arrows.splice(j, 1);
+          }
+        });
+
+        if (target.x < 0) targets.splice(i, 1);
+      });
+    }
+
+    function gameLoop() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      drawPlayer();
+      drawArrows();
+      drawTargets();
+      requestAnimationFrame(gameLoop);
+    }
+
+    setInterval(spawnTarget, 2000);
+    gameLoop();
+  }
+
+
 
 
 
