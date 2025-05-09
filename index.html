@@ -179,96 +179,115 @@
       100% { background-position: 0% 50%; }
     }
 
-.timeline-container {
+  /* Modal Style */
+        .modal-container {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
-            overflow-x: auto;
-            white-space: nowrap;
-            background-color: #fff;
-            padding: 40px 0;
-            position: relative;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            display: none; /* Hidden initially */
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7); /* Dark background for modal */
+            z-index: 1000;
+            overflow: auto;
         }
 
-        .timeline {
-            display: inline-block;
-            padding-left: 50px;
+        .modal-content {
+            background-color: #fff8e1;
+            margin: 50px auto;
+            padding: 20px;
+            border-radius: 10px;
+            width: 80%;
+            height: 80%;
+            overflow: auto;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            position: relative;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #b83f3f;
+            color: white;
+            border: none;
+            padding: 15px;
+            cursor: pointer;
+            border-radius: 50%;
+            font-size: 20px;
+        }
+
+        .close-btn:hover {
+            background-color: #ff5e5e;
+        }
+
+        .timeline-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            padding: 30px;
+            overflow-y: auto;
         }
 
         .timeline-event {
-            display: inline-block;
             width: 250px;
             height: 250px;
-            background-color: #8b5a2b;
+            background-color: #5e4b3c;
             border-radius: 15px;
             color: white;
             text-align: center;
             line-height: 250px;
-            margin: 10px;
             cursor: pointer;
             position: relative;
-            transition: all 0.3s ease;
+            font-size: 20px;
+            font-weight: bold;
             background-image: url('https://via.placeholder.com/250'); /* Placeholder Image */
             background-size: cover;
             background-position: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
         }
 
         .timeline-event:hover {
-            background-color: #6e4a2f;
             transform: scale(1.1);
+            box-shadow: 0 0 30px rgba(255, 223, 64, 0.8);
+        }
+
+        .timeline-event:active {
+            transform: scale(1);
+            box-shadow: none;
         }
 
         .event-details {
-            display: none;
-            position: fixed;
-            top: 20%;
-            left: 10%;
-            width: 80%;
-            background-color: white;
-            border: 2px solid #ccc;
+            background-color: #f7f1e1;
             padding: 20px;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-            z-index: 1000;
-            animation: fadeIn 0.5s ease;
-        }
-
-        @keyframes fadeIn {
-            0% { opacity: 0; }
-            100% { opacity: 1; }
+            border-radius: 15px;
+            margin-top: 20px;
+            text-align: left;
         }
 
         .event-details img {
-            max-width: 100%;
+            width: 100%;
             height: auto;
             border-radius: 10px;
-        }
-
-        .close-btn {
-            background-color: #f44336;
-            color: white;
-            border: none;
-            font-size: 20px;
-            padding: 10px;
-            cursor: pointer;
-            border-radius: 5px;
-            position: absolute;
-            top: 10px;
-            right: 10px;
-        }
-
-        .close-btn:hover {
-            background-color: #d32f2f;
+            margin-top: 10px;
         }
 
         .event-title {
-            font-size: 24px;
+            font-size: 28px;
             font-weight: bold;
+            color: #5e4b3c;
         }
 
         .event-description {
             font-size: 18px;
             margin-top: 10px;
+            color: #3c2f2a;
         }
+
+    
   </style>
 </head>
 <body>
@@ -318,21 +337,18 @@
   
   </div>
 
- <div class="timeline-container" id="timelineContainer">
-        <div class="timeline">
-            <div class="timeline-event" onclick="showDetails('1066-01', 'William the Conqueror Claims the Throne', 'January 1066, William the Conqueror claims the throne of England after King Edward the Confessor’s death.', 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/William_the_Conqueror.jpg/800px-William_the_Conqueror.jpg')">1066</div>
-            <div class="timeline-event" onclick="showDetails('1066-02', 'Battle of Stamford Bridge', 'September 25, 1066 - King Harold II defeats the invading army of Harald Hardrada at the Battle of Stamford Bridge.', 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Harold_II_of_England.jpg/800px-Harold_II_of_England.jpg')">Sept 25</div>
-            <div class="timeline-event" onclick="showDetails('1066-03', 'Battle of Hastings', 'October 14, 1066 - The Battle of Hastings between the Normans and Anglo-Saxons. Harold II is killed, and William the Conqueror wins.', 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Battle_of_Hastings.jpg/1024px-Battle_of_Hastings.jpg')">Oct 14</div>
-            <div class="timeline-event" onclick="showDetails('1066-04', 'Coronation of William the Conqueror', 'December 25, 1066 - William the Conqueror is crowned King of England.', 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Coronation_of_William_Conqueror.jpg/800px-Coronation_of_William_Conqueror.jpg')">Dec 25</div>
+ <div id="modal" class="modal-container">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeModal()">X</button>
+            <div class="timeline-container" id="timelineContainer">
+                <div class="timeline-event" onclick="showDetails('1066-01', 'William the Conqueror Claims the Throne', 'January 1066, William the Conqueror claims the throne of England after King Edward the Confessor’s death.', 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/William_the_Conqueror.jpg/800px-William_the_Conqueror.jpg')">1066</div>
+                <div class="timeline-event" onclick="showDetails('1066-02', 'Battle of Stamford Bridge', 'September 25, 1066 - King Harold II defeats the invading army of Harald Hardrada at the Battle of Stamford Bridge.', 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Harold_II_of_England.jpg/800px-Harold_II_of_England.jpg')">Sept 25</div>
+                <div class="timeline-event" onclick="showDetails('1066-03', 'Battle of Hastings', 'October 14, 1066 - The Battle of Hastings between the Normans and Anglo-Saxons. Harold II is killed, and William the Conqueror wins.', 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Battle_of_Hastings.jpg/1024px-Battle_of_Hastings.jpg')">Oct 14</div>
+                <div class="timeline-event" onclick="showDetails('1066-04', 'Coronation of William the Conqueror', 'December 25, 1066 - William the Conqueror is crowned King of England.', 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Coronation_of_William_Conqueror.jpg/800px-Coronation_of_William_Conqueror.jpg')">Dec 25</div>
+            </div>
         </div>
     </div>
 
-    <div class="event-details" id="eventDetails">
-        <button class="close-btn" onclick="closeDetails()">X</button>
-        <h2 class="event-title" id="eventTitle"></h2>
-        <img id="eventImage" src="" alt="Event Image">
-        <p class="event-description" id="eventDescription"></p>
-    </div>
 
   <script src="history-events.js"></script>
 
