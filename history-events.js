@@ -104,78 +104,108 @@ let inputSequence = '';
     location.reload(); // resets the game
   }
 
-  // Simple Game Code
-  function startBattle() {
-    const canvas = document.getElementById('gameCanvas');
-    const ctx = canvas.getContext('2d');
+  // Initialize Game Variables
+  let score = 0;
+  let gameObjects = [];
+  let crossbowX = 50, crossbowY = 180;
+  let arrowSpeed = 10;
+  let arrows = [];
+  let objectsToHit = ['bomb', 'horseman'];
+  let hitObjects = [];
 
-    const player = { x: 50, y: 180, width: 20, height: 40, color: 'brown' };
-    let arrows = [];
-    let targets = [];
+  const canvas = document.getElementById('gameCanvas');
+  const ctx = canvas.getContext('2d');
 
-    document.addEventListener('keydown', function (e) {
-      if (e.key === 'ArrowUp') player.y -= 10;
-      if (e.key === 'ArrowDown') player.y += 10;
-      if (e.key === ' ') {
-        arrows.push({ x: player.x + 20, y: player.y + 10, width: 10, height: 4 });
-      }
-    });
+  // Preload music
+  const backgroundMusic = new Audio('https://www.soundjay.com/button/beep-07.wav'); // replace with actual medieval music
+  backgroundMusic.loop = true;
+  backgroundMusic.play();
 
-    function spawnTarget() {
-      const y = Math.random() * (canvas.height - 40);
-      targets.push({ x: canvas.width, y: y, width: 30, height: 30, color: 'red' });
-    }
-
-    function drawPlayer() {
-      ctx.fillStyle = player.color;
-      ctx.fillRect(player.x, player.y, player.width, player.height);
-    }
-
-    function drawArrows() {
-      ctx.fillStyle = 'black';
-      arrows.forEach((arrow, i) => {
-        arrow.x += 8;
-        ctx.fillRect(arrow.x, arrow.y, arrow.width, arrow.height);
-        if (arrow.x > canvas.width) arrows.splice(i, 1);
-      });
-    }
-
-    function drawTargets() {
-      targets.forEach((target, i) => {
-        target.x -= 3;
-        ctx.fillStyle = target.color;
-        ctx.fillRect(target.x, target.y, target.width, target.height);
-
-        // Collision detection
-        arrows.forEach((arrow, j) => {
-          if (
-            arrow.x < target.x + target.width &&
-            arrow.x + arrow.width > target.x &&
-            arrow.y < target.y + target.height &&
-            arrow.y + arrow.height > target.y
-          ) {
-            targets.splice(i, 1);
-            arrows.splice(j, 1);
-          }
-        });
-
-        if (target.x < 0) targets.splice(i, 1);
-      });
-    }
-
-    function gameLoop() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      drawPlayer();
-      drawArrows();
-      drawTargets();
-      requestAnimationFrame(gameLoop);
-    }
-
-    setInterval(spawnTarget, 2000);
-    gameLoop();
+  // Draw Crossbow
+  function drawCrossbow() {
+    ctx.fillStyle = 'brown';
+    ctx.fillRect(crossbowX, crossbowY, 30, 15); // Crossbow body
+    ctx.fillStyle = 'gray';
+    ctx.fillRect(crossbowX + 10, crossbowY - 5, 10, 10); // Crossbow trigger
   }
 
+  // Draw Arrows
+  function drawArrows() {
+    ctx.fillStyle = 'black';
+    arrows.forEach((arrow, i) => {
+      ctx.fillRect(arrow.x, arrow.y, arrow.width, arrow.height);
+      arrow.x += arrowSpeed;
+      if (arrow.x > canvas.width) arrows.splice(i, 1); // Remove arrows when they go off-screen
+    });
+  }
 
+  // Draw Game Objects (bombs, horseback riders)
+  function drawGameObjects() {
+    gameObjects.forEach((obj, i) => {
+      ctx.fillStyle = obj.color;
+      ctx.fillRect(obj.x, obj.y, obj.width, obj.height);
 
+      // Move objects
+      obj.x -= 3;
+      if (obj.x < 0) gameObjects.splice(i, 1); // Remove if off-screen
 
+      // Collision detection
+      arrows.forEach((arrow, j) => {
+        if (
+          arrow.x < obj.x + obj.width &&
+          arrow.x + arrow.width > obj.x &&
+          arrow.y < obj.y + obj.height &&
+          arrow.y + arrow.height > obj.y
+        ) {
+          gameObjects.splice(i, 1);
+          arrows.splice(j, 1);
+          score += 10;
+          updateScore();
+        }
+      });
+    });
+  }
 
+  // Spawn Random Objects
+  function spawnGameObject() {
+    const objectType = objectsToHit[Math.floor(Math.random() * objectsToHit.length)];
+    const xPos = canvas.width;
+    const yPos = Math.random() * (canvas.height - 30);
+    let newObject = { x: xPos, y: yPos, width: 30, height: 30, color: 'red', type: objectType };
+
+    if (objectType === 'bomb') {
+      newObject.color = 'yellow';
+    } else if (objectType === 'horseman') {
+      newObject.color = 'blue';
+    }
+
+    gameObjects.push(newObject);
+  }
+
+  // Draw Score
+  function updateScore() {
+    document.getElementById('score').innerText = `Score: ${score}`;
+  }
+
+  // Game Loop
+  function gameLoop() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    drawCrossbow();
+    drawArrows();
+    drawGameObjects();
+    requestAnimationFrame(gameLoop);
+  }
+
+  setInterval(spawnGameObject, 2000); // Spawn objects every 2 seconds
+  gameLoop();
+
+  // Handle Mouse Movement
+  canvas.addEventListener('mousemove', function (e) {
+    const mouseX = e.clientX - canvas.offsetLeft;
+    crossbowY = mouseX; // Move crossbow vertically to follow the mouse
+  });
+
+  // Fire Arrow when clicked
+  canvas.addEventListener('click', function () {
+    arrows.push({ x: crossbowX + 30, y: crossbowY + 5, width: 10, height: 3 });
+  });
