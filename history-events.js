@@ -85,23 +85,3 @@ const events = [
 
 
 
-// Below is the code for one of the hidden easter eggs s
-
-
-
-let inputSequence = '';
-  document.addEventListener('keydown', (e) => {
-    inputSequence += e.key.toLowerCase();
-    if (inputSequence.includes('1066')) {
-      document.getElementById('easter-egg').style.display = 'block';
-      document.getElementById('danceMusic').play();
-    }
-    if (inputSequence.length > 10) inputSequence = '';
-  });
-
-  function closeEasterEgg() {
-    document.getElementById('easter-egg').style.display = 'none';
-    const music = document.getElementById('danceMusic');
-    music.pause();
-    music.currentTime = 0;
-  }
