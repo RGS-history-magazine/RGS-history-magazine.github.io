@@ -179,6 +179,41 @@
       100% { background-position: 0% 50%; }
     }
 
+    #easter-egg {
+      display: none;
+      position: fixed;
+      top: 20%;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #fff;
+      border: 5px solid gold;
+      padding: 20px;
+      z-index: 9999;
+      text-align: center;
+      box-shadow: 0 0 20px rgba(0,0,0,0.4);
+      animation: bounce 1s infinite;
+    }
+
+    #easter-egg img {
+      max-width: 150px;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translate(-50%, 0); }
+      50% { transform: translate(-50%, -10px); }
+    }
+
+    #close-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 18px;
+      background: red;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      cursor: pointer;
+    }
     
   </style>
 </head>
@@ -230,7 +265,17 @@
 
   </div>
 
+
+  <div id="easter-egg">
+  <button id="close-btn" onclick="closeEasterEgg()">✖</button>
+  <img src="https://upload.wikimedia.org/wikipedia/commons/1/1b/William_the_Conqueror_%28miniature%29.jpg" alt="William">
+  <p>🎶 William is conquering the dance floor! 🎶</p>
+  <audio id="danceMusic" src="your-audio.mp3" autoplay></audio>
+</div>
+
   <script src="history-events.js"></script>
+
+  
     
 </body>
 </html>
