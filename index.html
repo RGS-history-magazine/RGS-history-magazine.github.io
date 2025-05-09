@@ -178,8 +178,7 @@
       50% { background-position: 100% 50%; }
       100% { background-position: 0% 50%; }
     }
-
-    #gamePopup {
+#gamePopup {
       display: none;
       position: fixed;
       top: 0;
@@ -212,6 +211,14 @@
 
     h2 {
       margin-top: 15px;
+    }
+
+    #score {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      font-size: 20px;
+      color: white;
     }
     
   </style>
@@ -264,12 +271,12 @@
   </div>
 
 
-  <div id="gamePopup">
+ <div id="gamePopup">
   <button id="closeGame" onclick="closeGame()">✖ Close</button>
-  <h2>🏹 Battle of Hastings – Norman Archer Game 🏹</h2>
+  <h2>🏹 Battle of Hastings – Crossbow Game 🏹</h2>
   <canvas id="gameCanvas" width="800" height="400"></canvas>
+  <div id="score">Score: 0</div>
 </div>
-
 
 
 
