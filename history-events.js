@@ -93,18 +93,33 @@ const events = [
 
             // Check if the typed text is "1066"
             if (typed.includes("1066")) {
-                document.getElementById('timelineContainer').style.display = 'block'; // Show the timeline
+                openModal(); // Open modal with the timeline
                 typed = ""; // Reset the typed input
             }
         });
 
-        function showDetails(eventId, title, description, imgUrl) {
-            document.getElementById('eventTitle').innerText = title;
-            document.getElementById('eventDescription').innerText = description;
-            document.getElementById('eventImage').src = imgUrl;
-            document.getElementById('eventDetails').style.display = 'block';
+        // Function to open the modal
+        function openModal() {
+            document.getElementById('modal').style.display = 'block'; // Show modal
         }
 
-        function closeDetails() {
-            document.getElementById('eventDetails').style.display = 'none';
+        // Function to close the modal
+        function closeModal() {
+            document.getElementById('modal').style.display = 'none'; // Close modal
+        }
+
+        // Function to show event details in the modal
+        function showDetails(eventId, title, description, imgUrl) {
+            const modalContent = document.querySelector('.modal-content');
+
+            const detailsDiv = document.createElement('div');
+            detailsDiv.classList.add('event-details');
+
+            detailsDiv.innerHTML = `
+                <h2 class="event-title">${title}</h2>
+                <p class="event-description">${description}</p>
+                <img src="${imgUrl}" alt="${title}">
+            `;
+
+            modalContent.appendChild(detailsDiv);
         }
