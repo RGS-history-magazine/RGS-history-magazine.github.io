@@ -85,41 +85,51 @@ const events = [
 // Easter eggs below
 
 
- let typed = "";
+ let code = '';
+    document.addEventListener('keydown', (e) => {
+      code += e.key;
+      if (code.includes('1066')) {
+        document.getElementById('easter-egg').style.display = 'flex';
+        code = '';
+      }
+      if (code.length > 4) code = code.slice(-4);
+    });
 
-        // Listen for keypresses on the document
-        document.addEventListener('keydown', function(event) {
-            typed += event.key;
+    function showFeature(id) {
+      document.getElementById('menu').style.display = 'none';
+      document.querySelectorAll('.feature').forEach(f => f.style.display = 'none');
+      document.getElementById(id).style.display = 'block';
+    }
 
-            // Check if the typed text is "1066"
-            if (typed.includes("1066")) {
-                openModal(); // Open modal with the timeline
-                typed = ""; // Reset the typed input
-            }
-        });
+    // Graffiti Wall Drawing Logic
+    const canvas = document.getElementById('graffitiCanvas');
+    if (canvas) {
+      const ctx = canvas.getContext('2d');
+      let painting = false;
 
-        // Function to open the modal
-        function openModal() {
-            document.getElementById('modal').style.display = 'block'; // Show modal
-        }
+      function start(e) {
+        painting = true;
+        draw(e);
+      }
 
-        // Function to close the modal
-        function closeModal() {
-            document.getElementById('modal').style.display = 'none'; // Close modal
-        }
+      function end() {
+        painting = false;
+        ctx.beginPath();
+      }
 
-        // Function to show event details in the modal
-        function showDetails(eventId, title, description, imgUrl) {
-            const modalContent = document.querySelector('.modal-content');
+      function draw(e) {
+        if (!painting) return;
+        ctx.lineWidth = 3;
+        ctx.lineCap = 'round';
+        ctx.strokeStyle = 'red';
+        const rect = canvas.getBoundingClientRect();
+        ctx.lineTo(e.clientX - rect.left, e.clientY - rect.top);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(e.clientX - rect.left, e.clientY - rect.top);
+      }
 
-            const detailsDiv = document.createElement('div');
-            detailsDiv.classList.add('event-details');
-
-            detailsDiv.innerHTML = `
-                <h2 class="event-title">${title}</h2>
-                <p class="event-description">${description}</p>
-                <img src="${imgUrl}" alt="${title}">
-            `;
-
-            modalContent.appendChild(detailsDiv);
-        }
+      canvas.addEventListener('mousedown', start);
+      canvas.addEventListener('mouseup', end);
+      canvas.addEventListener('mousemove', draw);
+    }
