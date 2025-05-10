@@ -358,20 +358,22 @@
   </div>
 
   <script>
-    let secretCode = "1066";
-let input = "";
+   let secretCode = "1066";
+  let inputBuffer = "";
 
-document.addEventListener('keydown', function(event) {
-  input += event.key;
-  
-  if (input.includes(secretCode)) {
-    showEasterEgg();  // Trigger Easter egg
-    input = '';  // Reset after triggering
-  }
-  
-  // Limit input length to secret code length (6 characters)
-  if (input.length > secretCode.length) {
-    input = input.slice(1);
+  document.addEventListener("keydown", (event) => {
+    if (/^\d$/.test(event.key)) { // Only keep digits
+      inputBuffer += event.key;
+
+      if (inputBuffer.endsWith(secretCode)) {
+        showEasterEgg();
+        inputBuffer = ""; // Reset after match
+      }
+
+      // Keep buffer short
+      if (inputBuffer.length > secretCode.length) {
+        inputBuffer = inputBuffer.slice(-secretCode.length);
+      }
   }
 });
 
