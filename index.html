@@ -236,6 +236,37 @@
       to { opacity: 1; }
     }
 
+    .menu {
+  background: rgba(0, 0, 0, 0.8);
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 0 30px rgba(255, 255, 255, 0.2);
+  text-align: center;
+  animation: fadeIn 1s ease;
+  opacity: 1;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.feature {
+  display: none;
+  animation: fadeIn 1s ease forwards;
+  max-width: 90vw;
+  max-height: 90vh;
+  overflow: auto;
+  background: rgba(0, 0, 0, 0.9);
+  border-radius: 20px;
+  padding: 20px;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
     
   </style>
 </head>
@@ -326,74 +357,30 @@
 
   <script>
     // Listen for keypresses to trigger the Easter egg
-    let secretCode = "1066";
-    let input = "";
-
-    document.addEventListener('keydown', function(event) {
-      input += event.key;
-      if (input.includes(secretCode)) {
-        showEasterEgg();
-        input = '';  // Reset after triggering
-      }
-      // Limit input length to secret code length
-      if (input.length > secretCode.length) {
-        input = input.slice(1);
-      }
-    });
-
     function closeEasterEgg() {
-      document.getElementById("easter-egg").style.display = 'none';
-    }
+  const easterEgg = document.getElementById("easter-egg");
+  const menu = document.getElementById("menu");
 
-    function showEasterEgg() {
-      document.getElementById("easter-egg").style.display = 'flex';
-    }
+  // Fade out the menu first
+  menu.style.animation = "fadeOut 0.5s forwards";
+  
+  // After fade out, hide the entire Easter Egg
+  setTimeout(() => {
+    easterEgg.style.display = 'none';
+    menu.style.animation = '';  // Reset animation for reuse
+  }, 500); // Match the fade-out duration
+}
 
-    function showFeature(feature) {
-      const allFeatures = document.querySelectorAll('.feature');
-      allFeatures.forEach(f => f.style.display = 'none');
-      document.getElementById(feature).style.display = 'block';
-    }
+function showFeature(feature) {
+  const allFeatures = document.querySelectorAll('.feature');
+  allFeatures.forEach(f => f.style.display = 'none');
+  
+  // Fade in the selected feature
+  const featureElement = document.getElementById(feature);
+  featureElement.style.display = 'block';
+  featureElement.style.animation = 'fadeIn 1s ease forwards';
+}
 
-    function setPenColor(color) {
-      currentColor = color;
-    }
-
-    function setPenWidth(width) {
-      currentWidth = width;
-    }
-
-    let currentColor = 'black';
-    let currentWidth = 5;
-
-    const canvas = document.getElementById('graffitiCanvas');
-    const ctx = canvas.getContext('2d');
-    let drawing = false;
-
-    canvas.addEventListener('mousedown', (e) => {
-      drawing = true;
-      ctx.beginPath();
-      ctx.moveTo(e.offsetX, e.offsetY);
-    });
-
-    canvas.addEventListener('mousemove', (e) => {
-      if (drawing) {
-        ctx.lineTo(e.offsetX, e.offsetY);
-        ctx.strokeStyle = currentColor;
-        ctx.lineWidth = currentWidth;
-        ctx.lineJoin = 'round';
-        ctx.lineCap = 'round';
-        ctx.stroke();
-      }
-    });
-
-    canvas.addEventListener('mouseup', () => {
-      drawing = false;
-    });
-
-    canvas.addEventListener('mouseout', () => {
-      drawing = false;
-    });
   </script>
 
   <script src="history-events.js"></script>
