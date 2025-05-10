@@ -7,6 +7,155 @@
 <link rel="stylesheet" type="text/css" href="style.css" />
   
   <title>RGS History Magazine</title>
+
+  <style>
+
+     #easter-egg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/b/bd/Bayeux_Tapestry_scene55_Harold_death.jpg/1200px-Bayeux_Tapestry_scene55_Harold_death.jpg') no-repeat center center/cover;
+      z-index: 9999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      backdrop-filter: blur(5px);
+    }
+    .menu {
+      background: rgba(0, 0, 0, 0.8);
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 0 30px rgba(255, 255, 255, 0.2);
+      text-align: center;
+      animation: fadeIn 1s ease;
+    }
+    .menu h1 {
+      font-size: 2.5em;
+      margin-bottom: 20px;
+    }
+    .menu button {
+      display: block;
+      margin: 10px auto;
+      padding: 15px 30px;
+      font-size: 1.2em;
+      background: #ffdd57;
+      color: #000;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .menu button:hover {
+      background: #ffe97d;
+    }
+    .feature {
+      display: none;
+      animation: fadeIn 1s ease forwards;
+      max-width: 90vw;
+      max-height: 90vh;
+      overflow: auto;
+      background: rgba(0, 0, 0, 0.9);
+      border-radius: 20px;
+      padding: 20px;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .menu {
+  background: rgba(0, 0, 0, 0.8);
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 0 30px rgba(255, 255, 255, 0.2);
+  text-align: center;
+  transition: opacity 0.5s ease-in-out;
+  animation: fadeIn 1s ease;
+  opacity: 1;
+}
+
+.feature {
+  opacity: 1;
+  display: none;
+  animation: fadeIn 1s ease;
+  max-width: 90vw;
+  max-height: 90vh;
+  overflow: auto;
+  background: rgba(0, 0, 0, 0.9);
+  border-radius: 20px;
+  padding: 20px;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+    footer {
+      background-color: #000000 /* black background */
+      color: white;              /* white text */
+      padding: 20px;
+      text-align: center;
+
+      .insta-profiles {
+  padding: 2rem;
+  background: #fafafa;
+  text-align: center;
+}
+
+.insta-profiles h2 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.profile-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1.5rem;
+}
+
+.profile-card {
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  text-decoration: none;
+  color: black;
+  padding: 1rem;
+  transition: transform 0.2s ease;
+}
+
+.profile-card:hover {
+  transform: scale(1.05);
+}
+
+.profile-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.profile-card h3 {
+  margin: 0.5rem 0 0.2rem;
+  font-size: 1.1rem;
+}
+
+.profile-card p {
+  font-size: 0.9rem;
+  color: #555;
+}
+
+
+      
+  </style>
   
 </head>
 <body>
