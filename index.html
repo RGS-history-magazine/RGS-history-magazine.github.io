@@ -242,14 +242,15 @@
   border-radius: 15px;
   box-shadow: 0 0 30px rgba(255, 255, 255, 0.2);
   text-align: center;
+  transition: opacity 0.5s ease-in-out;
   animation: fadeIn 1s ease;
   opacity: 1;
-  transition: opacity 0.5s ease-in-out;
 }
 
 .feature {
+  opacity: 1;
   display: none;
-  animation: fadeIn 1s ease forwards;
+  animation: fadeIn 1s ease;
   max-width: 90vw;
   max-height: 90vh;
   overflow: auto;
@@ -267,6 +268,7 @@
   from { opacity: 1; }
   to { opacity: 0; }
 }
+
     
   </style>
 </head>
@@ -400,9 +402,30 @@ function showEasterEgg() {
   menu.style.animation = "fadeIn 1s ease forwards";  // Fade in the menu
 }
 
-function showFeature(feature) {
-  const allFeatures = document.querySelectorAll('.feature');
-  allFeatures.forEach(f => f.style.display = 'none');
+function showFeature(featureId) {
+  const menu = document.getElementById("menu");
+  const feature = document.getElementById(featureId);
+  const allFeatures = document.querySelectorAll(".feature");
+
+  // Fade out the menu
+  menu.style.animation = "fadeOut 0.5s ease forwards";
+
+  // Wait for fadeOut to finish before showing the feature
+  setTimeout(() => {
+    menu.style.display = "none";
+
+    // Hide all other features
+    allFeatures.forEach(f => {
+      f.style.display = "none";
+      f.style.opacity = 0;
+    });
+
+    // Show and fade in selected feature
+    feature.style.display = "block";
+    feature.style.animation = "fadeIn 1s ease forwards";
+  }, 500); // Match fadeOut time
+}
+
   
   // Fade in the selected feature
   const featureElement = document.getElementById(feature);
