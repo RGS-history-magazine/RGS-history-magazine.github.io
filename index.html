@@ -179,114 +179,62 @@
       100% { background-position: 0% 50%; }
     }
 
-  /* Modal Style */
-        .modal-container {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.7); /* Dark background for modal */
-            z-index: 1000;
-            overflow: auto;
-        }
-
-        .modal-content {
-            background-color: #fff8e1;
-            margin: 50px auto;
-            padding: 20px;
-            border-radius: 10px;
-            width: 80%;
-            height: 80%;
-            overflow: auto;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-            text-align: center;
-            position: relative;
-        }
-
-        .close-btn {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background-color: #b83f3f;
-            color: white;
-            border: none;
-            padding: 15px;
-            cursor: pointer;
-            border-radius: 50%;
-            font-size: 20px;
-        }
-
-        .close-btn:hover {
-            background-color: #ff5e5e;
-        }
-
-        .timeline-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 20px;
-            padding: 30px;
-            overflow-y: auto;
-        }
-
-        .timeline-event {
-            width: 250px;
-            height: 250px;
-            background-color: #5e4b3c;
-            border-radius: 15px;
-            color: white;
-            text-align: center;
-            line-height: 250px;
-            cursor: pointer;
-            position: relative;
-            font-size: 20px;
-            font-weight: bold;
-            background-image: url('https://via.placeholder.com/250'); /* Placeholder Image */
-            background-size: cover;
-            background-position: center;
-            transition: transform 0.3s, box-shadow 0.3s;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
-        }
-
-        .timeline-event:hover {
-            transform: scale(1.1);
-            box-shadow: 0 0 30px rgba(255, 223, 64, 0.8);
-        }
-
-        .timeline-event:active {
-            transform: scale(1);
-            box-shadow: none;
-        }
-
-        .event-details {
-            background-color: #f7f1e1;
-            padding: 20px;
-            border-radius: 15px;
-            margin-top: 20px;
-            text-align: left;
-        }
-
-        .event-details img {
-            width: 100%;
-            height: auto;
-            border-radius: 10px;
-            margin-top: 10px;
-        }
-
-        .event-title {
-            font-size: 28px;
-            font-weight: bold;
-            color: #5e4b3c;
-        }
-
-        .event-description {
-            font-size: 18px;
-            margin-top: 10px;
-            color: #3c2f2a;
-        }
-
+  #easter-egg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/b/bd/Bayeux_Tapestry_scene55_Harold_death.jpg/1200px-Bayeux_Tapestry_scene55_Harold_death.jpg') no-repeat center center/cover;
+      z-index: 9999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      backdrop-filter: blur(5px);
+    }
+    .menu {
+      background: rgba(0, 0, 0, 0.8);
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 0 30px rgba(255, 255, 255, 0.2);
+      text-align: center;
+      animation: fadeIn 1s ease;
+    }
+    .menu h1 {
+      font-size: 2.5em;
+      margin-bottom: 20px;
+    }
+    .menu button {
+      display: block;
+      margin: 10px auto;
+      padding: 15px 30px;
+      font-size: 1.2em;
+      background: #ffdd57;
+      color: #000;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .menu button:hover {
+      background: #ffe97d;
+    }
+    .feature {
+      display: none;
+      animation: fadeIn 1s ease forwards;
+      max-width: 90vw;
+      max-height: 90vh;
+      overflow: auto;
+      background: rgba(0, 0, 0, 0.9);
+      border-radius: 20px;
+      padding: 20px;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    
     
   </style>
 </head>
@@ -337,17 +285,37 @@
   
   </div>
 
- <div id="modal" class="modal-container">
-        <div class="modal-content">
-            <button class="close-btn" onclick="closeModal()">X</button>
-            <div class="timeline-container" id="timelineContainer">
-                <div class="timeline-event" onclick="showDetails('1066-01', 'William the Conqueror Claims the Throne', 'January 1066, William the Conqueror claims the throne of England after King Edward the Confessor’s death.', 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/William_the_Conqueror.jpg/800px-William_the_Conqueror.jpg')">1066</div>
-                <div class="timeline-event" onclick="showDetails('1066-02', 'Battle of Stamford Bridge', 'September 25, 1066 - King Harold II defeats the invading army of Harald Hardrada at the Battle of Stamford Bridge.', 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Harold_II_of_England.jpg/800px-Harold_II_of_England.jpg')">Sept 25</div>
-                <div class="timeline-event" onclick="showDetails('1066-03', 'Battle of Hastings', 'October 14, 1066 - The Battle of Hastings between the Normans and Anglo-Saxons. Harold II is killed, and William the Conqueror wins.', 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Battle_of_Hastings.jpg/1024px-Battle_of_Hastings.jpg')">Oct 14</div>
-                <div class="timeline-event" onclick="showDetails('1066-04', 'Coronation of William the Conqueror', 'December 25, 1066 - William the Conqueror is crowned King of England.', 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Coronation_of_William_Conqueror.jpg/800px-Coronation_of_William_Conqueror.jpg')">Dec 25</div>
-            </div>
-        </div>
+ <div id="easter-egg">
+    <div class="menu" id="menu">
+      <h1>Welcome to 1066 Time Portal 🏰</h1>
+      <button onclick="showFeature('musical')">🎭 1066: The Musical</button>
+      <button onclick="showFeature('quiz')">🧠 Quickfire Quiz Duel</button>
+      <button onclick="showFeature('graffiti')">🎨 Tapestry Graffiti Wall</button>
+      <button onclick="showFeature('doc')">🎥 Documentary Intro Spoof</button>
     </div>
+    <div class="feature" id="musical">
+      <h2>1066: The Musical</h2>
+      <p>🎵 Singing Normans, dramatic scenes and saxons with soul! 🎶</p>
+      <audio controls autoplay loop>
+        <source src="https://cdn.pixabay.com/audio/2023/06/28/audio_beddb6676b.mp3" type="audio/mp3">
+      </audio>
+    </div>
+    <div class="feature" id="quiz">
+      <h2>Quickfire Quiz Duel</h2>
+      <p>(Placeholder: real quiz to come!)</p>
+    </div>
+    <div class="feature" id="graffiti">
+      <h2>Tapestry Graffiti Wall</h2>
+      <canvas id="graffitiCanvas" width="800" height="400" style="border:2px solid white; background: url('https://upload.wikimedia.org/wikipedia/commons/b/b4/Bayeux_Tapestry_scene49.jpg') no-repeat center/cover;"></canvas>
+    </div>
+    <div class="feature" id="doc">
+      <h2>Documentary Intro Spoof</h2>
+      <p>"In the year 1066, everything changed..."</p>
+      <audio controls autoplay loop>
+        <source src="https://cdn.pixabay.com/audio/2023/07/30/audio_4e04f31a7e.mp3" type="audio/mp3">
+      </audio>
+    </div>
+  </div>
 
 
   <script src="history-events.js"></script>
