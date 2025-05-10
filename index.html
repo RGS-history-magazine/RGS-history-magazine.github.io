@@ -274,6 +274,55 @@
       color: white;              /* white text */
       padding: 20px;
       text-align: center;
+
+      .insta-profiles {
+  padding: 2rem;
+  background: #fafafa;
+  text-align: center;
+}
+
+.insta-profiles h2 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.profile-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1.5rem;
+}
+
+.profile-card {
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  text-decoration: none;
+  color: black;
+  padding: 1rem;
+  transition: transform 0.2s ease;
+}
+
+.profile-card:hover {
+  transform: scale(1.05);
+}
+
+.profile-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.profile-card h3 {
+  margin: 0.5rem 0 0.2rem;
+  font-size: 1.1rem;
+}
+
+.profile-card p {
+  font-size: 0.9rem;
+  color: #555;
+}
+
     
   </style>
 </head>
@@ -318,6 +367,37 @@
       </div>
     </section>
   </div>
+
+
+  //* SOCIAL MEDIA PROFILES *//
+  
+  <section class="insta-profiles">
+  <h2>📸 Time Travelers' Feed</h2>
+  <div class="profile-grid">
+    <a href="profile-cleopatra.html" class="profile-card">
+      <img src="images/cleopatra.jpg" alt="Cleopatra">
+      <h3>Cleopatra VII</h3>
+      <p>@queenofthenile</p>
+    </a>
+    
+    <a href="profile-william.html" class="profile-card">
+      <img src="images/william.jpg" alt="William the Conqueror">
+      <h3>William the Conqueror</h3>
+      <p>@king1066</p>
+    </a>
+
+    <a href="profile-mlk.html" class="profile-card">
+      <img src="images/mlk.jpg" alt="Martin Luther King Jr.">
+      <h3>Martin Luther King Jr.</h3>
+      <p>@mlkspeeches</p>
+    </a>
+
+    <!-- Add more figures here! -->
+  </div>
+</section>
+
+
+  //* FOOTER *//
 
   <footer>
 
