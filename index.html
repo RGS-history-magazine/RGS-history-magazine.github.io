@@ -356,8 +356,24 @@
   </div>
 
   <script>
-    // Listen for keypresses to trigger the Easter egg
-    function closeEasterEgg() {
+    let secretCode = "1066";
+let input = "";
+
+document.addEventListener('keydown', function(event) {
+  input += event.key;
+  
+  if (input.includes(secretCode)) {
+    showEasterEgg();  // Trigger Easter egg
+    input = '';  // Reset after triggering
+  }
+  
+  // Limit input length to secret code length (6 characters)
+  if (input.length > secretCode.length) {
+    input = input.slice(1);
+  }
+});
+
+function closeEasterEgg() {
   const easterEgg = document.getElementById("easter-egg");
   const menu = document.getElementById("menu");
 
@@ -369,6 +385,19 @@
     easterEgg.style.display = 'none';
     menu.style.animation = '';  // Reset animation for reuse
   }, 500); // Match the fade-out duration
+}
+
+function showEasterEgg() {
+  const easterEgg = document.getElementById("easter-egg");
+  
+  // Ensure the Easter egg container is visible
+  easterEgg.style.display = 'flex';
+
+  // Optional: Apply fade-in animation to the entire Easter egg
+  easterEgg.style.animation = "fadeIn 1s ease forwards";
+  
+  const menu = document.getElementById("menu");
+  menu.style.animation = "fadeIn 1s ease forwards";  // Fade in the menu
 }
 
 function showFeature(feature) {
